@@ -1,0 +1,53 @@
+#app {}
+
+#barContainer {
+    height: 100px;
+    display: flex;
+    position: relative;
+}
+
+.bar {
+    height: 100%;
+    width: 20px;
+    background-color: beige;
+    border: solid 5px purple;
+    position: absolute;
+    bottom: -5px;
+}
+
+#hungerBar {
+    left: 0px;
+}
+
+#cleanlinessBar {
+    left: 40px;
+}
+
+#playfulnessBar {
+    left: 80px;
+}
+
+#batten {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+#batBod {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+#batFaceNeut {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#batFaceJoy {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+button {
+    height: 30px;
+}
