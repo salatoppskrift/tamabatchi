@@ -1,6 +1,10 @@
-let hunger = 75
-let cleanliness = 75
-let playfulness = 75
+let hunger = 100
+let cleanliness = 100
+let playfulness = 100
+let hasBeenFed = false
+let hasBeenCleaned = false
+let hasBeenPlayed = false
+
 
 function updateView(){
     document.getElementById("app").innerHTML=/*HTML*/`
@@ -9,18 +13,53 @@ function updateView(){
             <div class="bar" id="cleanlinessBar"></div>
             <div  class="bar" id="playfulnessBar"></div>
         </div>
-        <div id="batten">
-            <img id="batBod" src="batAnimBod.gif">
-            <img id="batFaceNeut" src="batAnimFaceNeutral.gif">
-            <img id="batFaceJoy" src="batAnimFaceJoy.gif">
+        <div class="bat" id="batten">
+            <img class="bat" id="batBod" src="batAnimBod.gif">
+            <img class="bat" id="batFaceNeut" src="batAnimFaceNeutral.gif">
+            <img class="bat" id="batFaceJoy" src="batAnimFaceJoy.gif">
         </div>
     <br>
-    <button>Eat</button>
-    <button>Clean</button>
-    <button>Play</button>
+    <button onclick=feedBatt()>Eat</button>
+    <button onclick=cleanBatt()>Clean</button>
+    <button onclick=playBatt()>Play</button>
     `
 }
 
-function drainHunger(){
-    hunger -= 4
+function loop(){
+    if (!hasBeenFed) hunger -= 4
+    cleanliness -= 1
+    playfulness -= 2
+    document.getElementById('cleanlinessBar').style.height = playfulness +"%"
+    document.getElementById('playfulnessBar').style.height = cleanliness +"%"
+    document.getElementById('hungerBar').style.height = hunger +"%"
+}
+
+setInterval(loop, 500)
+
+function feedBatt(){
+    hunger += 25
+    hasBeenFed=true
+    document.getElementById('hungerBar').style.height = hunger +"%"
+    setTimeout(setHasBeenFed, 1000)
+}
+function setHasBeenFed(){
+    hasBeenFed=false
+}
+function cleanBatt(){
+    cleanliness += 25
+    hasBeenCleaned=true
+    document.getElementById('cleanlinessBar').style.height = cleanliness +"%"
+    setTimeout(setHasBeenCleaned, 1000)
+}
+function setHasBeenCleaned(){
+    hasBeenCleaned=false
+}
+function playBatt(){
+    playfulness += 25
+    hasBeenPlayed=true
+    document.getElementById('playfulnessBar').style.height = playfulness +"%"
+    setTimeout(setHasBeenPlayed, 1000)
+}
+function setHasBeenPlayed(){
+    hasBeenPlayed=false
 }
