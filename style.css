@@ -58,10 +58,13 @@
 }
 
 button {
+    margin-left: 5px;
     height: 30px;
 }
 .feeder{
-    position: relative
+    margin-top: 70vh;
+    margin-left: 44.5%;
+    position: relative;
 }
 .cleaner{
     position: relative;

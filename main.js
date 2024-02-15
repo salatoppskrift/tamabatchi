@@ -43,7 +43,7 @@ function loop() {
     document.getElementById('playfulnessBar').style.height = playfulness + "%"
 }
 
-loopId = setInterval(loop, 10000)
+loopId = setInterval(loop, 1000)
 
 function feedBatt() {
     if (isdead) return;
