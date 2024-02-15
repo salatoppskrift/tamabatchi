@@ -34,6 +34,7 @@ function loop() {
         clearInterval(loopId)
         document.getElementById('batBod').classList.toggle('noBatForYou')
         isdead = true
+        setTimeout(flyingBat, 1000)
     }
     if (!hasBeenFed) hunger -= 4
     cleanliness -= 1
@@ -43,7 +44,19 @@ function loop() {
     document.getElementById('playfulnessBar').style.height = playfulness + "%"
 }
 
-loopId = setInterval(loop, 1000)
+function flyingBat() {
+    let image = document.createElement("img")
+    image.id = "flightsim"
+    image.src="batAnimUndeadFlight.gif"
+    document.getElementById("batFaceNeut").classList.toggle("noBatForYou")
+    document.getElementById("batDead").classList.toggle("noBatForYou")
+    document.getElementById("batten").appendChild(image)
+    setTimeout(() => {
+        document.getElementById('flightsim').remove()
+    }, 1000);
+}
+
+loopId = setInterval(loop, 10)
 
 function feedBatt() {
     if (isdead) return;
