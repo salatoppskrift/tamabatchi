@@ -1,48 +1,73 @@
 let loopId = null
-let values = [100, 100, 100]
-let recentValue = [false, false, false]
+let values = [
+  {
+    value: 100,
+    toMinus: 4,
+    recent: false,
+    graphId: 'hungerBar',
+    buttonId: 'feeder',
+    label: 'Feed',
+  },
+  {
+    value: 100,
+    toMinus: 1,
+    recent: false,
+    graphId: 'cleanlinessBar',
+    buttonId: 'cleaner',
+    label: 'Clean',
+  },
+  {
+    value: 100,
+    toMinus: 2,
+    recent: false,
+    graphId: 'playfulnessBar',
+    buttonId: 'player',
+    label: 'Play',
+  },
+]
 
 function updateView() {
   document.getElementById('app').innerHTML = /*HTML*/ `
-        <div id="barContainer">
-            <div class="bar" id="hungerBar"></div>
-            <div class="bar" id="cleanlinessBar"></div>
-            <div  class="bar" id="playfulnessBar"></div>
-        </div>
+		${drawGraphs()}
+		${drawBat()}
+    <br>
+		${drawButtons()}
+    `
+}
+
+function drawGraphs() {
+  let html = "<div id='barContainer'>"
+  values.forEach((e) => (html += `<div class="bar" id="${e.graphId}"></div>`))
+  html += '</div>'
+  return html
+}
+
+function drawButtons() {
+  let html = ''
+  values.forEach(
+    (e) =>
+      (html += `<button onclick="incrementValue(${values.indexOf(e)})">${e.label}</button>`),
+  )
+  return html
+}
+
+function drawBat() {
+  return `
         <div class="bat" id="batten">
             <img class="bat" id="batBod" src="batAnimBod.gif">
             <img class="bat" id="batFaceNeut" src="batAnimFaceNeutral.gif">
             <img class="bat noBatForYou" id="batFaceJoy" src="batAnimFaceJoy.gif">
             <img class="bat noBatForYou" id="batDead" src="batAnimDead.gif">
         </div>
-    <br>
-    <button class="feeder" onclick="incrementValue(0, 'hungerBar')">Eat</button>
-    <button class="cleaner" onclick="incrementValue(1, 'cleanlinessBar')">Clean</button>
-    <button class="player" onclick="incrementValue(2, 'playfulnessBar')">Play</button>
-    `
-}
-
-function incrementValue(index, id) {
-  if (isDead()) return
-
-  values[index] += 28
-  recentValue[index] = true
-  if (values[index] > 100) values[index] = 100
-
-  updateGraph(id, index)
-
-  setTimeout(() => (recentValue[index] = false), 1000)
+	`
 }
 
 function toggleVisible(id) {
   document.getElementById(id).classList.toggle('noBatForYou')
 }
 
-function setDead() {
-  toggleVisible('batDead')
-  toggleVisible('batBod')
-  clearInterval(loopId)
-  setTimeout(startDeathAnim, 1000)
+function updateGraph(id, index) {
+  document.getElementById(id).style.height = values[index].value + '%'
 }
 
 function startDeathAnim() {
@@ -58,29 +83,38 @@ function startDeathAnim() {
 }
 
 function isDead() {
-  return values[0] <= 0 && values[1] <= 0 && values[2] <= 0
+  let depletedCount = 0
+  values.forEach((e) => {
+    if (e.value <= 0) depletedCount++
+  })
+  return depletedCount == values.length
 }
 
-function tickValues() {
-  if (!recentValue[0]) values[0] -= 4
-  if (!recentValue[1]) values[1] -= 1
-  if (!recentValue[2]) values[2] -= 2
+function setDead() {
+  toggleVisible('batDead')
+  toggleVisible('batBod')
+  clearInterval(loopId)
+  setTimeout(startDeathAnim, 1000)
 }
 
-function updateGraphs() {
-  updateGraph('hungerBar', 0)
-  updateGraph('cleanlinessBar', 1)
-  updateGraph('playfulnessBar', 2)
-}
+function incrementValue(index) {
+  if (isDead()) return
 
-function updateGraph(id, index) {
-  document.getElementById(id).style.height = values[index] + '%'
+  values[index].value += 28
+  if (values[index].value > 100) values[index].value = 100
+
+  updateGraph(values[index].graphId, index)
+
+  setTimeout(() => (values[index].recent = false), 1000)
 }
 
 function loop() {
   if (isDead()) setDead()
-  tickValues()
-  updateGraphs()
+  values.forEach((e) => {
+    let i = values.indexOf(e)
+    values[i].value -= values[i].toMinus
+    updateGraph(e.graphId, i)
+  })
 }
 
 loopId = setInterval(loop, 500)
