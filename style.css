@@ -19,42 +19,38 @@
 
 #hungerBar {
     left: 0px;
+    background-color: brown;
 }
 
 #cleanlinessBar {
     left: 40px;
+    background-color: rgb(52, 228, 199);
 }
 
 #playfulnessBar {
     left: 80px;
+    background-color: goldenrod;
 }
 
 .bat {}
 
 #batten {
+    display: flex;
     position: relative;
-    top: 0;
-    left: 0;
+    align-self: center;
+    justify-content: center;
 }
 #batBod {
-    position: relative;
-    top: 0;
-    left: 0;
+    position: absolute;
 }
 #batFaceNeut {
     position: absolute;
-    top: 0;
-    left: 0;
 }
 #batFaceJoy {
     position: absolute;
-    top: 0;
-    left: 0;
 }
 #batDead {
     position: absolute;
-    top: 0;
-    left: 0;
 }
 
 .noBatForYou {
@@ -63,4 +59,13 @@
 
 button {
     height: 30px;
+}
+.feeder{
+    position: relative
+}
+.cleaner{
+    position: relative;
+}
+.player{
+    position: relative;
 }

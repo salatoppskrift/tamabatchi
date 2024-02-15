@@ -5,6 +5,7 @@ let playfulness = 100
 let hasBeenFed = false
 let hasBeenCleaned = false
 let hasBeenPlayed = false
+let isdead = false
 
 
 function updateView() {
@@ -21,9 +22,9 @@ function updateView() {
             <img class="bat noBatForYou" id="batDead" src="batAnimDead.gif">
         </div>
     <br>
-    <button onclick=feedBatt()>Eat</button>
-    <button onclick=cleanBatt()>Clean</button>
-    <button onclick=playBatt()>Play</button>
+    <button class="feeder" onclick=feedBatt()>Eat</button>
+    <button class="cleaner" onclick=cleanBatt()>Clean</button>
+    <button class="player" onclick=playBatt()>Play</button>
     `
 }
 
@@ -32,6 +33,7 @@ function loop() {
         document.getElementById('batDead').classList.toggle("noBatForYou")
         clearInterval(loopId)
         document.getElementById('batBod').classList.toggle('noBatForYou')
+        isdead = true
     }
     if (!hasBeenFed) hunger -= 4
     cleanliness -= 1
@@ -41,9 +43,10 @@ function loop() {
     document.getElementById('playfulnessBar').style.height = playfulness + "%"
 }
 
-loopId = setInterval(loop, 100)
+loopId = setInterval(loop, 10000)
 
 function feedBatt() {
+    if (isdead) return;
     hunger += 28
     if (hunger > 100)
         hunger = 100
@@ -55,6 +58,7 @@ function setHasBeenFed() {
     hasBeenFed = false
 }
 function cleanBatt() {
+    if (isdead) return;
     cleanliness += 28
     if (cleanliness > 100)
         cleanliness = 100
@@ -66,6 +70,7 @@ function setHasBeenCleaned() {
     hasBeenCleaned = false
 }
 function playBatt() {
+    if (isdead) return;
     playfulness += 28
     if (playfulness > 100)
         playfulness = 100
