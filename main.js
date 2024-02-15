@@ -17,6 +17,7 @@ function updateView(){
             <img class="bat" id="batBod" src="batAnimBod.gif">
             <img class="bat" id="batFaceNeut" src="batAnimFaceNeutral.gif">
             <img class="bat" id="batFaceJoy" src="batAnimFaceJoy.gif">
+            <img class="bat noBatForYou" id="batDead" src="batAnimDead.gif">
         </div>
     <br>
     <button onclick=feedBatt()>Eat</button>
@@ -26,18 +27,21 @@ function updateView(){
 }
 
 function loop(){
+    if (hunger <= 0 && cleanliness <=0 && playfulness <=0){
+        document.getElementById('batDead').classList.toggle("noBatForYou")
+    }
     if (!hasBeenFed) hunger -= 4
     cleanliness -= 1
     playfulness -= 2
-    document.getElementById('cleanlinessBar').style.height = playfulness +"%"
-    document.getElementById('playfulnessBar').style.height = cleanliness +"%"
     document.getElementById('hungerBar').style.height = hunger +"%"
+    document.getElementById('cleanlinessBar').style.height = cleanliness +"%"
+    document.getElementById('playfulnessBar').style.height = playfulness +"%"
 }
 
-setInterval(loop, 500)
+setInterval(loop, 1000)
 
 function feedBatt(){
-    hunger += 25
+    hunger += 28
     hasBeenFed=true
     document.getElementById('hungerBar').style.height = hunger +"%"
     setTimeout(setHasBeenFed, 1000)
@@ -46,7 +50,7 @@ function setHasBeenFed(){
     hasBeenFed=false
 }
 function cleanBatt(){
-    cleanliness += 25
+    cleanliness += 28
     hasBeenCleaned=true
     document.getElementById('cleanlinessBar').style.height = cleanliness +"%"
     setTimeout(setHasBeenCleaned, 1000)
@@ -55,7 +59,7 @@ function setHasBeenCleaned(){
     hasBeenCleaned=false
 }
 function playBatt(){
-    playfulness += 25
+    playfulness += 28
     hasBeenPlayed=true
     document.getElementById('playfulnessBar').style.height = playfulness +"%"
     setTimeout(setHasBeenPlayed, 1000)

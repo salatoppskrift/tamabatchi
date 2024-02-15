@@ -51,6 +51,15 @@
     top: 0;
     left: 0;
 }
+#batDead {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.noBatForYou {
+    opacity: 0%;
+}
 
 button {
     height: 30px;
