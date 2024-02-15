@@ -1,3 +1,4 @@
+let loopId
 let hunger = 100
 let cleanliness = 100
 let playfulness = 100
@@ -6,8 +7,8 @@ let hasBeenCleaned = false
 let hasBeenPlayed = false
 
 
-function updateView(){
-    document.getElementById("app").innerHTML=/*HTML*/`
+function updateView() {
+    document.getElementById("app").innerHTML =/*HTML*/`
         <div id="barContainer">
             <div class="bar" id="hungerBar"></div>
             <div class="bar" id="cleanlinessBar"></div>
@@ -16,7 +17,7 @@ function updateView(){
         <div class="bat" id="batten">
             <img class="bat" id="batBod" src="batAnimBod.gif">
             <img class="bat" id="batFaceNeut" src="batAnimFaceNeutral.gif">
-            <img class="bat" id="batFaceJoy" src="batAnimFaceJoy.gif">
+            <img class="bat noBatForYou" id="batFaceJoy" src="batAnimFaceJoy.gif">
             <img class="bat noBatForYou" id="batDead" src="batAnimDead.gif">
         </div>
     <br>
@@ -26,44 +27,52 @@ function updateView(){
     `
 }
 
-function loop(){
-    if (hunger <= 0 && cleanliness <=0 && playfulness <=0){
+function loop() {
+    if (hunger <= 0 && cleanliness <= 0 && playfulness <= 0) {
         document.getElementById('batDead').classList.toggle("noBatForYou")
+        clearInterval(loopId)
+        document.getElementById('batBod').classList.toggle('noBatForYou')
     }
     if (!hasBeenFed) hunger -= 4
     cleanliness -= 1
     playfulness -= 2
-    document.getElementById('hungerBar').style.height = hunger +"%"
-    document.getElementById('cleanlinessBar').style.height = cleanliness +"%"
-    document.getElementById('playfulnessBar').style.height = playfulness +"%"
+    document.getElementById('hungerBar').style.height = hunger + "%"
+    document.getElementById('cleanlinessBar').style.height = cleanliness + "%"
+    document.getElementById('playfulnessBar').style.height = playfulness + "%"
 }
 
-setInterval(loop, 1000)
+loopId = setInterval(loop, 100)
 
-function feedBatt(){
+function feedBatt() {
     hunger += 28
-    hasBeenFed=true
-    document.getElementById('hungerBar').style.height = hunger +"%"
+    if (hunger > 100)
+        hunger = 100
+    hasBeenFed = true
+    document.getElementById('hungerBar').style.height = hunger + "%"
     setTimeout(setHasBeenFed, 1000)
 }
-function setHasBeenFed(){
-    hasBeenFed=false
+function setHasBeenFed() {
+    hasBeenFed = false
 }
-function cleanBatt(){
+function cleanBatt() {
     cleanliness += 28
-    hasBeenCleaned=true
-    document.getElementById('cleanlinessBar').style.height = cleanliness +"%"
+    if (cleanliness > 100)
+        cleanliness = 100
+    hasBeenCleaned = true
+    document.getElementById('cleanlinessBar').style.height = cleanliness + "%"
     setTimeout(setHasBeenCleaned, 1000)
 }
-function setHasBeenCleaned(){
-    hasBeenCleaned=false
+function setHasBeenCleaned() {
+    hasBeenCleaned = false
 }
-function playBatt(){
+function playBatt() {
     playfulness += 28
-    hasBeenPlayed=true
-    document.getElementById('playfulnessBar').style.height = playfulness +"%"
+    if (playfulness > 100)
+        playfulness = 100
+    hasBeenPlayed = true
+    document.getElementById('playfulnessBar').style.height = playfulness + "%"
     setTimeout(setHasBeenPlayed, 1000)
 }
-function setHasBeenPlayed(){
-    hasBeenPlayed=false
+function setHasBeenPlayed() {
+    hasBeenPlayed = false
 }
