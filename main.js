@@ -34,9 +34,13 @@ function incrementValue(index, id) {
   setTimeout(() => (recentValue[index] = false), 1000)
 }
 
+function toggleVisible(id) {
+	document.getElementById(id).classList.toggle('noBatForYou')
+}
+
 function setDead() {
-  document.getElementById('batDead').classList.toggle('noBatForYou')
-  document.getElementById('batBod').classList.toggle('noBatForYou')
+	toggleVisible('batDead')
+	toggleVisible('batBod')
   clearInterval(loopId)
   setTimeout(startDeathAnim, 1000)
 }
@@ -45,8 +49,8 @@ function startDeathAnim() {
   let image = document.createElement('img')
   image.id = 'flightsim'
   image.src = 'batAnimUndeadFlight.gif'
-  document.getElementById('batFaceNeut').classList.toggle('noBatForYou')
-  document.getElementById('batDead').classList.toggle('noBatForYou')
+	toggleVisible('batFaceNeut')
+	toggleVisible('batDead')
   document.getElementById('batten').appendChild(image)
   setTimeout(() => {
     document.getElementById('flightsim').remove()
