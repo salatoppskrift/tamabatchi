@@ -1,1 +1,1 @@
-Tamagotchi team oppgave - GET Academy
+![alt text](ReadMe/pageScreen.png)

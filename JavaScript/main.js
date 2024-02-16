@@ -13,18 +13,18 @@ function updateView() {
     document.getElementById("app").innerHTML =/*HTML*/`
         <div id="barContainer">
             <div class="bar" id="hungerBar"></div>
-            <img class="eat" src="hunger.png">
+            <img class="eat" src="Assets/hunger.png">
             <div class="bar" id="cleanlinessBar"></div>
-            <img class="bath" src="bath.png">
+            <img class="bath" src="Assets/bath.png">
             <div class="bar" id="playfulnessBar"></div>
-            <img class="play" src="play.png">
+            <img class="play" src="Assets/play.png">
         </div>
         <div class="bat" id="batten">
-            <img class="grassPatch" id="grassPatch" src="grass.png"><br>
-            <img class="bat" id="batBod" src="batAnimBod.gif">
-            <img class="bat" id="batFaceNeut" src="batAnimFaceNeutral.gif">
-            <img class="bat noBatForYou" id="batFaceJoy" src="batAnimFaceJoy.gif">
-            <img class="bat noBatForYou" id="batDead" src="batAnimDead.gif">
+            <img class="grassPatch" id="grassPatch" src="Assets/grass.png"><br>
+            <img class="bat" id="batBod" src="Assets/batAnimBod.gif">
+            <img class="bat" id="batFaceNeut" src="Assets/batAnimFaceNeutral.gif">
+            <img class="bat noBatForYou" id="batFaceJoy" src="Assets/batAnimFaceJoy.gif">
+            <img class="bat noBatForYou" id="batDead" src="Assets/batAnimDead.gif">
             
         </div>
     <button class="feeder" onclick=feedBatt()>Eat</button>
@@ -55,7 +55,7 @@ function flyingBat() {
     let image = document.createElement("img")
     let grabContainer = document.getElementById("batten")
     image.id = "flightsim"
-    image.src="batAnimUndeadFlight.gif"
+    image.src="Assets/batAnimUndeadFlight.gif"
     document.getElementById("batFaceNeut").classList.toggle("noBatForYou")
     document.getElementById("batDead").classList.toggle("noBatForYou")
     document.getElementById("batten").appendChild(image)
@@ -82,7 +82,7 @@ function feedBatt() {
 function setHasBeenFed() {
     hasBeenFed = false
 }
-// Introduserte verditap ved høyere aktivitets nivå som feks at leking gjør deg skitten.
+
 function cleanBatt() {
     if (isdead) return;
     cleanliness += 28
@@ -111,4 +111,3 @@ function setHasBeenPlayed() {
     hasBeenPlayed = false
 }
 
-// Bra jobba! :)
