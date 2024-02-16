@@ -7,6 +7,34 @@
     display: flex;
     position: relative;
 }
+/* 
+.play - .bath - .eat tilhører <img> til status barer. 
+Se linje 16, 18 og 20 i main.js.
+*/ 
+.play{
+    position: absolute;
+    margin-top: 92px;
+    margin-left: 65px;
+    height: 60px;
+    width: 60px;
+
+}
+.bath{
+    position: absolute;
+    margin-top: 99px;
+    height: 40px;
+    width: 40px;
+    margin-left: 34px;
+
+}
+.eat{
+    position: absolute;
+    margin-top: 110px;
+    left: -7px;
+    height: 30px;
+    width: 30px;
+
+}
 
 .bar {
     height: 100%;
@@ -48,6 +76,7 @@
 }
 #batFaceJoy {
     position: absolute;
+    
 }
 #batDead {
     position: absolute;
@@ -56,6 +85,14 @@
 .noBatForYou {
     opacity: 0%;
 }
+
+/* Vis og diskuter */
+.grassPatch {
+    position: absolute;
+    margin-top: 475px;
+    margin-right: 20px;
+}
+
 
 button {
     margin-left: 5px;
